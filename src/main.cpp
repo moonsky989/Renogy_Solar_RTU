@@ -27,6 +27,7 @@ bool msgSwitch = true;
 std::vector<uint16_t> registerList;
 const PROGMEM char* CURRENT_SOLAR_TOPIC = "/home/backyard/solar_current";
 const PROGMEM char*   DAILY_SOLAR_TOPIC = "/home/backyard/solar_daily";
+const PROGMEM char*   SOLAR_COMMAND_TOPIC = "/home/backyard/solar_commands";
 const char* SOLAR_TOPIC = CURRENT_SOLAR_TOPIC;
 
 void loadList(bool currentData)
@@ -101,13 +102,14 @@ void reconnect()
     String clientId = "ESP8266Client-";
     clientId += String(random(0xffff), HEX);
     // Attempt to connect
-    if (client.connect(clientId.c_str())) {
+    if (client.connect(clientId.c_str())) 
+    {
       Serial.println("connected");
-      // Once connected, publish an announcement...
-      client.publish("outTopic", "hello world");
       // ... and resubscribe
-      client.subscribe("inTopic");
-    } else {
+      client.subscribe(SOLAR_COMMAND_TOPIC);
+    } 
+    else 
+    {
       failure_cnt++;
       Serial.print("failed, rc=");
       Serial.print(client.state());
