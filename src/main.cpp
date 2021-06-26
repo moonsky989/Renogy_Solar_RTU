@@ -10,7 +10,7 @@ const int ON = LOW;
 const int OFF = HIGH;
 
 // Network Config
-const char* ssid = "wifi_ap";
+const char* ssid = "wifi_ssid";
 const char* password = "password";
 const char* mqtt_server = "192.168.0.106";
 
